@@ -13,10 +13,10 @@ import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
 import Colors from '../constants/colors';
 
-const StartGameScreen = (props) => {
+const StartGameScreen = ({ onStartGame }) => {
   const [enteredValue, setEnteredValue] = React.useState('');
   const [confirmed, setConfirmed] = React.useState(false);
-  const [selectedNumber, setSelectedNumber] = React.useState(false);
+  const [selectedNumber, setSelectedNumber] = React.useState(0);
 
   const numberInputHandler = (inputText) => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ''));
@@ -29,15 +29,17 @@ const StartGameScreen = (props) => {
 
   const confirmInputHandler = () => {
     const chosenNumber = parseInt(enteredValue);
+
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert('Invalid number!', 'Number has to between 1 and 99', [
         { text: 'Okay', style: 'destructive', onPress: resetInputHandler }
       ]);
+
       return;
     }
     setConfirmed(true);
-    setEnteredValue('');
     setSelectedNumber(chosenNumber);
+    setEnteredValue('');
     Keyboard.dismiss();
   };
 
@@ -48,7 +50,7 @@ const StartGameScreen = (props) => {
       <Card style={styles.summaryContainer}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)} />
+        <Button title="START GAME" onPress={onStartGame(selectedNumber)} />
       </Card>
     );
   }
@@ -80,7 +82,9 @@ const StartGameScreen = (props) => {
               <Button
                 style={styles.button}
                 title="Confirm"
-                onPress={confirmInputHandler}
+                onPress={(text) => {
+                  confirmInputHandler(text);
+                }}
                 color={Colors.primary}
               />
             </View>
