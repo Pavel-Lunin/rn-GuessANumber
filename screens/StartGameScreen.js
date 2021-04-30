@@ -23,7 +23,9 @@ const StartGameScreen = ({ onStartGame }) => {
     const numberInputHandler = (inputText) => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
     };
-
+    // изменения но не все
+    //а вот и дополнения.
+    //теперь все
     const resetInputHandler = () => {
         setEnteredValue('');
         setConfirmed(false);
