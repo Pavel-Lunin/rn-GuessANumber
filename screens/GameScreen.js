@@ -18,9 +18,7 @@ const generateRandomBetween = (min, max, exclude) => {
 };
 
 const GameScreen = ({ userChoice, onGameOver }) => {
-    const [currentGuess, setCurrentGuess] = React.useState(
-        generateRandomBetween(1, 100, userChoice)
-    );
+    const [currentGuess, setCurrentGuess] = React.useState(generateRandomBetween(1, 100, userChoice));
     const [rounds, setRounds] = React.useState(0);
 
     const currentLow = React.useRef(1);
@@ -37,9 +35,7 @@ const GameScreen = ({ userChoice, onGameOver }) => {
             (direction === 'lower' && currentGuess < userChoice) ||
             (direction === 'greater' && currentGuess > userChoice)
         ) {
-            Alert.alert("Don't lie", 'You know that this is wrong...', [
-                { text: 'Sorry!', style: 'cancel' }
-            ]);
+            Alert.alert("Don't lie", 'You know that this is wrong...', [{ text: 'Sorry!', style: 'cancel' }]);
             return;
         }
 
@@ -48,18 +44,14 @@ const GameScreen = ({ userChoice, onGameOver }) => {
         } else {
             currentLow.current = currentGuess;
         }
-        const nextNumber = generateRandomBetween(
-            currentLow.current,
-            currentHigh.current,
-            currentGuess
-        );
+        const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
         setCurrentGuess(nextNumber);
         setRounds((rounds) => rounds + 1);
     };
 
     return (
         <View style={styles.screen}>
-            <Text style={DefaultStyles.bodyText}>Opponent's Guess</Text>
+            <Text style={DefaultStyles.title}>Opponent's Guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
                 <Button title="МЕНЬШЕ" onPress={nextGuessHandler.bind(this, 'lower')} />

@@ -1,13 +1,5 @@
-import React from 'react';
-import {
-    Alert,
-    Button,
-    Keyboard,
-    StyleSheet,
-    Text,
-    TouchableWithoutFeedback,
-    View
-} from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { Alert, Button, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import BodyText from '../components/BodyText';
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -19,15 +11,15 @@ const StartGameScreen = ({ onStartGame }) => {
     const [enteredValue, setEnteredValue] = React.useState('');
     const [confirmed, setConfirmed] = React.useState(false);
     const [selectedNumber, setSelectedNumber] = React.useState(0);
-
+    console.log(confirmed);
     const numberInputHandler = (inputText) => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
     };
 
-    const resetInputHandler = () => {
+    const resetInputHandler = useMemo(() => {
         setEnteredValue('');
         setConfirmed(false);
-    };
+    }, [setEnteredValue, setConfirmed]);
 
     const confirmInputHandler = () => {
         const chosenNumber = parseInt(enteredValue);
@@ -52,7 +44,7 @@ const StartGameScreen = ({ onStartGame }) => {
             <Card style={styles.summaryContainer}>
                 <BodyText>You selected</BodyText>
                 <NumberContainer>{selectedNumber}</NumberContainer>
-                <Button title="START GAME" onPress={onStartGame(selectedNumber)} />
+                <Button title="START GAME" onPress={() => onStartGame(selectedNumber)} />
             </Card>
         );
     }
@@ -79,11 +71,7 @@ const StartGameScreen = ({ onStartGame }) => {
                     />
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                            <Button
-                                title="Reset"
-                                onPress={resetInputHandler}
-                                color={Colors.accent}
-                            />
+                            <Button title="Reset" onPress={resetInputHandler} color={Colors.accent} />
                         </View>
                         <View>
                             <Button

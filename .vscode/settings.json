@@ -5,7 +5,7 @@
     "prettier.trailingComma": "none",
     "prettier.semi": true,
     //"prettier.jsxBracketSameLine": true,
-    "prettier.printWidth": 100,
+    "prettier.printWidth": 120,
     "editor.snippetSuggestions": "top",
     "workbench.startupEditor": "newUntitledFile",
     "liveServer.settings.donotShowInfoMsg": true,
@@ -70,7 +70,8 @@
     "editor.renderWhitespace": "none",
     "editor.trimAutoWhitespace": false,
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.autoIndent": "none",
     "diffEditor.wordWrap": "on",
-    "window.zoomLevel": -1
+    "window.zoomLevel": -1,
+    "prettier.endOfLine": "auto",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
