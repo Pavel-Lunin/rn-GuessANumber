@@ -4,8 +4,6 @@
     "prettier.singleQuote": true,
     "prettier.trailingComma": "none",
     "prettier.semi": true,
-    //"prettier.jsxBracketSameLine": true,
-    "prettier.printWidth": 120,
     "editor.snippetSuggestions": "top",
     "workbench.startupEditor": "newUntitledFile",
     "liveServer.settings.donotShowInfoMsg": true,
