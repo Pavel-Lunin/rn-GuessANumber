@@ -1,8 +1,17 @@
 import React, { useCallback, useMemo } from 'react';
-import { Alert, Button, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+    Alert,
+    Button,
+    Keyboard,
+    StyleSheet,
+    Text,
+    TouchableWithoutFeedback,
+    View
+} from 'react-native';
 import BodyText from '../components/BodyText';
 import Card from '../components/Card';
 import Input from '../components/Input';
+import MainButton from '../components/MainButton';
 import NumberContainer from '../components/NumberContainer';
 import TitleText from '../components/TitleText';
 import Colors from '../constants/colors';
@@ -11,7 +20,7 @@ const StartGameScreen = ({ onStartGame }) => {
     const [enteredValue, setEnteredValue] = React.useState('');
     const [confirmed, setConfirmed] = React.useState(false);
     const [selectedNumber, setSelectedNumber] = React.useState(0);
-    console.log(confirmed);
+
     const numberInputHandler = (inputText) => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
     };
@@ -26,7 +35,11 @@ const StartGameScreen = ({ onStartGame }) => {
 
         if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
             Alert.alert('Invalid number!', 'Number has to between 1 and 99', [
-                { text: 'Okay', style: 'destructive', onPress: resetInputHandler }
+                {
+                    text: 'Okay',
+                    style: 'destructive',
+                    onPress: resetInputHandler
+                }
             ]);
 
             return;
@@ -44,7 +57,9 @@ const StartGameScreen = ({ onStartGame }) => {
             <Card style={styles.summaryContainer}>
                 <BodyText>You selected</BodyText>
                 <NumberContainer>{selectedNumber}</NumberContainer>
-                <Button title="START GAME" onPress={() => onStartGame(selectedNumber)} />
+                <MainButton onPress={() => onStartGame(selectedNumber)}>
+                    START GAME
+                </MainButton>
             </Card>
         );
     }
@@ -71,7 +86,11 @@ const StartGameScreen = ({ onStartGame }) => {
                     />
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                            <Button title="Reset" onPress={resetInputHandler} color={Colors.accent} />
+                            <Button
+                                title="Reset"
+                                onPress={resetInputHandler}
+                                color={Colors.accent}
+                            />
                         </View>
                         <View>
                             <Button
